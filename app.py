@@ -7,19 +7,19 @@ import matplotlib.pyplot as plt
 st.title('Análise de Dados: evolução nos números da educação superior a distância')
 
 #LEITURA DOS ARQUIVOS DE DADOS
-df_cursos_2021 = pd.read_parquet('2021.parquet')
-df_cursos_2020 = pd.read_parquet('2020.parquet')
-df_cursos_2019 = pd.read_parquet('2019.parquet')
-df_cursos_2018 = pd.read_parquet('2018.parquet')
-df_cursos_2017 = pd.read_parquet('2017.parquet')
+df_cursos_2021 = pd.read_csv('2021.csv')
+df_cursos_2020 = pd.read_csv('2020.csv')
+df_cursos_2019 = pd.read_csv('2019.csv')
+df_cursos_2018 = pd.read_csv('2018.csv')
+df_cursos_2017 = pd.read_csv('2017.csv')
 
 
 #REALIZANDO QUERY PARA FILTRAR APENAS OS DADOS NECESSÁRIOS PARA ANALISE
-df_cursos_ead_2021 = df_cursos_2021.query('TP_MODALIDADE_ENSINO == 2')
-df_cursos_ead_2020 = df_cursos_2020.query('TP_MODALIDADE_ENSINO == 2')
-df_cursos_ead_2019 = df_cursos_2019.query('TP_MODALIDADE_ENSINO == 2')
-df_cursos_ead_2018 = df_cursos_2018.query('TP_MODALIDADE_ENSINO == 2')
-df_cursos_ead_2017 = df_cursos_2017.query('TP_MODALIDADE_ENSINO == 2')
+# df_cursos_ead_2021 = df_cursos_2021.query('TP_MODALIDADE_ENSINO == 2')
+# df_cursos_ead_2020 = df_cursos_2020.query('TP_MODALIDADE_ENSINO == 2')
+# df_cursos_ead_2019 = df_cursos_2019.query('TP_MODALIDADE_ENSINO == 2')
+# df_cursos_ead_2018 = df_cursos_2018.query('TP_MODALIDADE_ENSINO == 2')
+# df_cursos_ead_2017 = df_cursos_2017.query('TP_MODALIDADE_ENSINO == 2')
 
 #TRATAMENTO DE DADOS NUMERICOS PARA CATEGORICOS
 def data_transformation(df):
@@ -29,20 +29,6 @@ def data_transformation(df):
                                                                         4: 'Instituto Federal de Educação, Ciência e Tecnologia',
                                                                         5: 'Centro Federal de Educação Tecnológica'},na_action=None)
 
-    df['TP_CATEGORIA_ADMINISTRATIVA'] = df['TP_CATEGORIA_ADMINISTRATIVA'].map({
-                                                                        1: 'Pública Federal',
-                                                                        2: 'Pública Estadual',
-                                                                        3: 'Pública Municipal',
-                                                                        4: 'Privada com fins lucrativos',
-                                                                        5: 'Privada sem fins lucrativos',
-                                                                        6: 'Privada - Particular em sentido estrito',
-                                                                        7: 'Especial',
-                                                                        8: 'Privada comunitária',
-                                                                        9: 'Privada confessional'}, na_action=None)
-
-    df['TP_REDE'] = df['TP_REDE'].map({
-                                1: 'Pública',
-                                2: 'Privada'}, na_action=None)  
 
     df['TP_GRAU_ACADEMICO'] = df['TP_GRAU_ACADEMICO'].map({
                                                     1: 'Bacharelado',
@@ -56,11 +42,11 @@ def data_transformation(df):
 
     return df
 
-df_cursos_ead_2021 = data_transformation(df_cursos_ead_2021)
-df_cursos_ead_2020 = data_transformation(df_cursos_ead_2020)
-df_cursos_ead_2019 = data_transformation(df_cursos_ead_2019)
-df_cursos_ead_2018 = data_transformation(df_cursos_ead_2018)
-df_cursos_ead_2017 = data_transformation(df_cursos_ead_2017)
+df_cursos_ead_2021 = data_transformation(df_cursos_2021)
+df_cursos_ead_2020 = data_transformation(df_cursos_2020)
+df_cursos_ead_2019 = data_transformation(df_cursos_2019)
+df_cursos_ead_2018 = data_transformation(df_cursos_2018)
+df_cursos_ead_2017 = data_transformation(df_cursos_2017)
 
 #RESUMO DOS DADOS PARA EXIBICAO EM TABELA
 dicionario_soma_anos =  {'Ano': [2017, 2018, 2019, 2020, 2021],
